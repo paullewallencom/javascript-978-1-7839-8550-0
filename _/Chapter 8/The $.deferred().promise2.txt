@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+      <script>
+         var post = $.ajax({
+             url: "/echo/json/", 
+             data: {json: JSON.stringify({firstMovieName: "Terminator", secondMovieName: "Terminator 2"})} ,
+             type: "POST"
+         });
+         
+         post.done(function(p){
+             alert(p.firstMovieName +  " saved.");
+         });
+         
+         post.fail(function(){
+             alert("error! b/c this URL is not functioning");
+         });
+               
+      </script>
+   </head>
+   <body>
+      <h1> you have seen the error.  </h1>
+   </body>
+</html>

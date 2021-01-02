@@ -1,0 +1,21 @@
+
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <title> Selector in action </title>
+      <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+      <script>
+         $(document).ready(function(){
+             $("button").click(function(){
+                 $("p").hide(); // this will able to select paragraph element from HTML 
+             });
+         });
+      </script>
+   </head>
+   <body>
+      <h2>I am a heading </h2> <!-- this is the place from where the  paragraph is selected -->
+      <p>I am a paragraph.</p>
+      <button>I am a button </button>
+   </body>
+</html>

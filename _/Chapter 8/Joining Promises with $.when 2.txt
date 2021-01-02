@@ -1,0 +1,27 @@
+
+         function getActor(Id){
+           var d = $.Deferred();
+           $.post(
+               "/echo/json/",
+               {json: JSON.stringify({firstName: "Arnold", lastName: "Schwarzenegger", rating: "8.0"})}
+           ).done(function(p){
+               d.resolve(p);
+           }).fail(d.reject); 
+           return d.promise();
+         }
+         
+         function getPersonByRating(rating){
+           return $.post("/echo/json/", {
+                   json: JSON.stringify({
+                       rating: "8.0" })
+           }).pipe(function(p){
+               return p.rating;
+           });
+         }
+         
+         $.when(getActor(123), getPersonByRating("123456789"))
+           .pipe(function(person, rating){
+               return $.extend(person, {rating: rating});
+           })
+           .done(function(person){
+               alert("The name is " + person.firstName + " and the rating is " + person.rating);

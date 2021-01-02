@@ -1,0 +1,9 @@
+
+         var deferred = $.Deferred();
+         
+         deferred.done(function(value) {
+         alert(value);
+         });
+         
+         deferred.resolve("hello $.deferred ");
+            

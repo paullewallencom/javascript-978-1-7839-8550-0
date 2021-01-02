@@ -1,0 +1,10 @@
+
+         var deferred = $.Deferred();
+         
+         deferred.resolve("hello resolve");
+         
+         deferred.done(function(value) {
+           alert(value);
+         });
+             
+    

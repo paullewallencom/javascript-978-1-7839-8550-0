@@ -1,0 +1,43 @@
+
+         function getActor(id){
+           var d = $.Deferred();
+           $.post(
+               "/echo/json/",
+               {json: JSON.stringify({firstName: "Arnold", lastName: "Schwarzenegger", rating: "8.0"}),
+                delay: 4}
+           ).done(function(p){
+               d.resolve(p);
+           }).fail(d.reject); 
+           return d.promise();
+         }
+         
+         function getActorByRating(rating){
+           return $.post("/echo/json/", {
+                    json: JSON.stringify({
+                                   rating: "8.0"
+                                    }),
+                    delay: 2
+           }).pipe(function(p){
+               return p.rating;
+           });
+         }
+         
+         
+         function load(){
+           $.blockUI({message: "Loading..."});
+           var loading = getActor(123)
+                                   .done(function(c){
+                                       $("span#firstName").html(c.firstName)
+                                   });
+         
+           var loadingRating = getActorByRating("8.0")
+                                   .done(function(rating){
+                                       $("span#rating").html(rating)
+                                   });
+           
+           $.when(loading, loadingRating)
+            .done($.unblockUI);
+         }
+         
+         load();
+          

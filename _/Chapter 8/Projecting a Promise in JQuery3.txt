@@ -1,0 +1,43 @@
+
+         function getStatus(){
+             var d = $.Deferred();
+             $.post(
+                 "/echo/json/",
+                 {
+                     json: JSON.stringify( {status: Math.floor(Math.random()*4+1)} ),
+                     delay: 1
+                 }
+             ).done(function(s){
+                 d.resolve(s.status);
+             }).fail(d.reject); 
+             return d.promise();
+         }
+         
+         function pollApiCallDone(){
+             //do something
+             return getStatus()
+                     .pipe(function(s){
+                         if(s === 1 || s == 2) {
+                             return s;  
+                         }
+                         
+                         return pollApiCallDone();
+                     });
+         }
+         
+         $.blockUI({message: "Please wait while we are  Loading the results"});
+         
+         pollApiCallDone()
+             .pipe(function(s){ 
+                     switch(s){
+                     case 1:
+                         return "completed";
+                     case 2:
+                         return "not completed";
+                     }  
+             })
+             .done(function(s){
+                 $.unblockUI();
+                 alert("The status of collection of API call is   >>> " + s);
+             });
+               

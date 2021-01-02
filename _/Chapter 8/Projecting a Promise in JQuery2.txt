@@ -1,0 +1,29 @@
+
+         function getActorByRating(id){
+             return $.post("/echo/json/", {
+                     json: JSON.stringify({firstName: "Arnold", lastName: "Schwarzenegger", rating: "8.0"})
+             }).pipe(function(p){
+                 return p.rating;
+             });
+         }
+         
+         function getActorByRating(rating){
+             return $.post("/echo/json/", {
+                     json: JSON.stringify({
+                         rating: "8.0" })
+             }).pipe(function(p){
+                 return p.rating;
+             });
+         }
+         
+         function getActorById(id){
+             return getActorByRating(id)
+                    .pipe(getActorByRating);  
+         }
+         
+         
+         getActorById(123)
+             .done(function(a){
+                 alert("The rating of Actor is " + a); 
+             });
+

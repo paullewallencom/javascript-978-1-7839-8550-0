@@ -1,0 +1,11 @@
+
+         var post = $.post("/echo/json/",
+          {
+              json: JSON.stringify({firstName: "Arnold", lastName: "Schwarzenegger"})
+          }
+         ).pipe(function(p){ 
+          return "Name Saved >> " + p.firstName + "  " + p.lastName;
+         });
+         
+         post.done(function(r){ alert(r); });
+  

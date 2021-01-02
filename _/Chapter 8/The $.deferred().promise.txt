@@ -1,0 +1,22 @@
+
+<!DOCTYPE html>
+<html>
+   <head>
+      <script src="http://code.jquery.com/jquery-1.9.0.js"></script>
+      <script>
+         function getPromise(){
+         return $.Deferred().promise();
+         }
+         
+         try{
+         getPromise().resolve("a");
+         }
+         catch(err){
+         alert(err);
+         }
+      </script>
+   </head>
+   <body>
+      <h1> you have seen the error.  </h1>
+   </body>
+</html> 
